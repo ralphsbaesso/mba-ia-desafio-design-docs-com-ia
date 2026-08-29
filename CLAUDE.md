@@ -29,7 +29,7 @@ Teste prático: se não dá pra preencher a coluna **Localização** do `docs/TR
 - Fonte `TRANSCRICAO` → localização no formato `[hh:mm] Nome` (a transcrição vai de `[09:00]` a `[09:53]`).
 - Fonte `CODIGO` → caminho real. **Confirme com `grep`/`ls` antes de citar qualquer path, símbolo ou linha.**
 
-Gates quantitativos do enunciado que costumam ser esquecidos: ≥8 requisitos funcionais no PRD; ≥2 itens em "Fora de escopo" e ≥2 riscos com probabilidade/impacto/mitigação; ≥2 alternativas descartadas e ≥2 questões em aberto no RFC, com links pra ≥2 ADRs; ≥4 endpoints com request/response e status codes no FDD; ≥4 caminhos reais na seção "Integração com o sistema existente"; ≥70% das linhas do tracker com fonte `TRANSCRICAO` e ≥5 com `CODIGO`.
+Gates quantitativos do enunciado que costumam ser esquecidos: ≥8 requisitos funcionais no PRD; ≥2 itens em "Fora de escopo" e ≥2 riscos com probabilidade/impacto/mitigação; ≥2 alternativas descartadas e ≥2 questões em aberto no RFC, com links pra ≥2 ADRs; ≥4 endpoints com request/response e status codes no FDD (TDD); ≥4 caminhos reais na seção "Integração com o sistema existente"; ≥70% das linhas do tracker com fonte `TRANSCRICAO` e ≥5 com `CODIGO`.
 
 ## Altura de cada documento (não duplicar)
 
@@ -38,10 +38,46 @@ Conteúdo repetido entre documentos é sinal de que está no lugar errado.
 - **PRD** — produto/negócio: por que e o quê (problema, escopo, métricas).
 - **RFC** — arquitetura, 2 a 4 páginas: o que propomos, quais alternativas caíram e o que ficou em aberto. Metadados usam os participantes da reunião como revisores. **Não desce ao detalhe do FDD.**
 - **ADRs** — uma decisão fechada por arquivo, formato MADR (Status, Contexto, Decisão, Alternativas Consideradas, Consequências com trade-off explícito).
-- **FDD** — implementação: fluxos, contratos, matriz de erros `WEBHOOK_*`, resiliência, observabilidade.
+- **FDD (= TDD / tech spec)** — implementação: fluxos, contratos, matriz de erros `WEBHOOK_*`, resiliência, observabilidade.
 - **TRACKER** — referência cruzada transversal.
 
-Ordem de produção sugerida: **ADRs → RFC → FDD → PRD → Tracker → README**.
+### Nota de nomenclatura: FDD (TDD)
+
+O enunciado chama de **FDD** ("Feature Design Document") o documento de implementação. **Isso é uma
+adaptação do desafio, não termo de mercado.** Na indústria, FDD normalmente significa *Feature-Driven
+Development* (metodologia) ou *Functional Design Document* — e este último descreve o sistema pela ótica
+de negócio, ou seja, o oposto do que o enunciado pede.
+
+O que o desafio chama de FDD é o que o mercado chama de **Technical Design Document (TDD) / tech spec**:
+"o que será construído, como será construído, e quais decisões foram tomadas e por quê".
+
+Consequências práticas:
+
+- **O nome do arquivo continua `docs/FDD.md`** — é exigência da estrutura do entregável, não mudar.
+- Ao escrever o documento, o modelo mental é o de tech spec (implementação), **nunca** o de functional
+  design document (negócio) — negócio é papel do PRD.
+- Onde couber (README do processo, cabeçalho do próprio `docs/FDD.md`), registrar a equivalência como
+  **FDD (TDD)** para o leitor de fora do desafio não se confundir.
+
+## Ordem de produção adotada
+
+**PRD → RFC → ADRs → FDD (TDD) → Tracker → README.**
+
+Decisão do autor da entrega, divergindo da "Ordem de execução sugerida" do enunciado
+(`the-challenge/INDEX.md:271-282`, que propõe ADRs primeiro e PRD por último). Motivo: esta é a cadeia
+canônica de mercado — PRD ("what & why") → RFC ("how? let's debate") → ADR (decisão congelada) → tech
+spec — e coincide com a tabela conceitual do próprio enunciado (`INDEX.md:36-42`). A ordem sugerida pelo
+enunciado é heurística de *redação* (as decisões já vêm fechadas da transcrição), não convenção de ciclo
+de vida.
+
+Duas dependências para trás que essa ordem cria, com as mitigações que **precisam** ser respeitadas:
+
+1. O RFC linka ADRs que ainda não existem em disco → os nomes dos arquivos de ADR ficam congelados antes
+   de escrever o RFC (tabela na Fase 3 do `PLANO.md`); a revisão final valida que todo link resolve.
+2. A seção "Decisões e trade-offs principais" do PRD depende dos ADRs → entra como esboço e é fechada na
+   passada de reconciliação, depois dos ADRs prontos.
+
+O detalhamento de fases, gates e checklist está em `PLANO.md` na raiz.
 
 ## Trabalhando com a transcrição
 
