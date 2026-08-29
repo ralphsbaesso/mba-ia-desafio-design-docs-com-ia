@@ -115,10 +115,12 @@ o mesmo evento duas vezes e deduplica pelo identificador único que enviamos. Ve
 
 - **Snapshot na inserção.** O evento guarda o payload **já renderizado** no momento da transição, não a
   referência ao pedido — assim a notificação continua fiel ao momento que descreve mesmo que o pedido
-  mude antes da entrega (`[09:52] Larissa`, ratificado por `[09:52] Diego` e `[09:52] Bruno`).
+  mude antes da entrega (`[09:52] Larissa`, ratificado por `[09:52] Diego` e `[09:52] Bruno`). Ver
+  [ADR-007](./adrs/ADR-007-snapshot-do-payload-na-insercao.md).
 - **Filtragem na origem.** Cada endpoint assina uma lista de status, e a filtragem acontece **na
   inserção**: se nenhum endpoint do cliente quer aquela transição, o evento nem é gravado
-  (`[09:34] Bruno`, `[09:34] Diego`).
+  (`[09:34] Bruno`, `[09:34] Diego`). Ver
+  [ADR-008](./adrs/ADR-008-filtragem-de-eventos-na-insercao.md).
 
 ### 3.4 Encaixe na codebase
 
@@ -190,3 +192,5 @@ bloqueante** e exige no mínimo 2 dias úteis antes do deploy (`[09:46] Sofia`).
 | [ADR-004 — Entrega at-least-once com `X-Event-Id`](./adrs/ADR-004-entrega-at-least-once-com-x-event-id.md) | Assumir duplicidade possível e deduplicar no cliente por identificador de evento *(§3.2e, RFC-ALT-04)* |
 | [ADR-005 — Worker separado em polling](./adrs/ADR-005-worker-separado-em-polling.md) | Processo separado da API, consumindo a outbox a cada 2 segundos *(§3.2b, RFC-ALT-03)* |
 | [ADR-006 — Reuso dos padrões existentes](./adrs/ADR-006-reuso-dos-padroes-existentes.md) | Módulo convencional reaproveitando erros, logger, middlewares e validação já existentes *(§3.4)* |
+| [ADR-007 — Snapshot do payload na inserção](./adrs/ADR-007-snapshot-do-payload-na-insercao.md) | Gravar o payload já renderizado, para o evento permanecer fiel ao momento da transição *(§3.3, RFC-ALT-07)* |
+| [ADR-008 — Filtragem de eventos na inserção](./adrs/ADR-008-filtragem-de-eventos-na-insercao.md) | Não gravar evento que nenhum endpoint ativo do cliente assina *(§3.3)* |
