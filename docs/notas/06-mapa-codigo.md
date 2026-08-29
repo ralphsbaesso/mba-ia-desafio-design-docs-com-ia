@@ -11,7 +11,7 @@ Base da seção "Integração com o sistema existente" do FDD.
 
 | # | Âncora (`arquivo:linha`) | Símbolo | Para que serve | Menção na reunião |
 | --- | --- | --- | --- | --- |
-| COD-01 | `src/modules/orders/order.service.ts:126` | `OrderService.changeStatus(id, input, userId)` | Todo o corpo roda dentro de `this.prisma.$transaction` (linha 131): valida transição, debita/repõe estoque, `tx.order.update` (156) e `tx.orderStatusHistory.create` (159). **Ponto de inserção do evento na outbox, na mesma transação.** | `[09:40] Bruno` |
+| COD-01 | `src/modules/orders/order.service.ts:126` | `OrderService.changeStatus(id, input, userId)` | Todo o corpo roda dentro de `this.prisma.$transaction` (linha 131): valida transição, debita/repõe estoque, `tx.order.update` (158) e `tx.orderStatusHistory.create` (159). **Ponto de inserção do evento na outbox, na mesma transação.** | `[09:40] Bruno` |
 | COD-02 | `src/modules/orders/order.service.ts:131` | `this.prisma.$transaction(async (tx) => …)` | A transação cujo `tx` seria passado a `publishWebhookEvent(tx, …)`. | `[09:41] Bruno`; `[09:41] Diego` |
 | COD-03 | `src/modules/orders/order.service.ts:159` | `tx.orderStatusHistory.create` | Insert de auditoria já feito na transação — precedente direto do insert na outbox. | `[09:04] Bruno`; `[09:06] Diego` |
 | COD-04 | `src/modules/orders/order.service.ts:152,155` | `debitStock` / `replenishStock` (privados, definidos em `:204` e `:233`) | Decremento/incremento de `stockQuantity` dentro da mesma transação — é o "peso" que Bruno usa para descartar o síncrono. | `[09:04] Bruno` |
