@@ -163,9 +163,9 @@ tratado como requisito desta fase.
 
 ## 8. Decisões e trade-offs principais
 
-> **Nota de processo.** Esta seção é o resumo, em linguagem de produto, das decisões técnicas fechadas
-> na reunião. O registro formal de cada decisão — com contexto, alternativas e consequências — está nos
-> [ADRs](./adrs/), e a proposta arquitetural que as conecta está no [RFC](./RFC.md).
+> Resumo, em linguagem de produto, das decisões técnicas fechadas na reunião. O registro formal de cada
+> uma — contexto, alternativas e consequências — está nos [ADRs](./adrs/); a proposta arquitetural que as
+> conecta está no [RFC](./RFC.md).
 
 | # | Decisão | Trade-off aceito | Registro |
 | --- | --- | --- | --- |
@@ -175,6 +175,8 @@ tratado como requisito desta fase.
 | 4 | **Assinar cada notificação com uma credencial exclusiva do endpoint**, rotacionável, em vez de uma credencial única da plataforma. | Ganha-se contenção de dano em caso de vazamento — cenário já vivido com um cliente. Paga-se com a complexidade de gerir o ciclo de vida de várias credenciais e a convivência temporária entre a antiga e a nova. | [ADR-003](./adrs/ADR-003-hmac-sha256-com-secret-por-endpoint.md) |
 | 5 | **Assumir entrega *at-least-once* e transferir a deduplicação para o cliente**, em vez de perseguir entrega exatamente-uma-vez. | Ganha-se simplicidade e alinhamento com o padrão de mercado (Stripe, GitHub). Paga-se com uma exigência de integração imposta ao cliente, que precisa ser bem documentada. | [ADR-004](./adrs/ADR-004-entrega-at-least-once-com-x-event-id.md) |
 | 6 | **Construir a feature reaproveitando ao máximo os padrões já existentes na plataforma** em vez de introduzir novas bibliotecas ou convenções. | Ganha-se velocidade de entrega, consistência e menor curva para o time. Paga-se com a aceitação das limitações dos padrões atuais. | [ADR-006](./adrs/ADR-006-reuso-dos-padroes-existentes.md) |
+| 7 | **Congelar o conteúdo da notificação no instante da mudança de status**, em vez de montá-la na hora do envio. | Ganha-se fidelidade: a notificação descreve o pedido como ele estava quando a transição ocorreu, mesmo numa entrega tardia. Paga-se com dados possivelmente desatualizados em relação ao pedido atual — o cliente que precisa do estado corrente consulta o pedido. | [ADR-007](./adrs/ADR-007-snapshot-do-payload-na-insercao.md) |
+| 8 | **Só gerar evento quando algum endpoint ativo do cliente assina aquela mudança**, filtrando na origem. | Ganha-se economia: nada é produzido para ser descartado depois. Paga-se com um efeito que precisa ser comunicado ao cliente — **ativar um endpoint não faz chegar nada do que aconteceu antes**, porque esses eventos nunca existiram. | [ADR-008](./adrs/ADR-008-filtragem-de-eventos-na-insercao.md) |
 
 ## 9. Dependências
 

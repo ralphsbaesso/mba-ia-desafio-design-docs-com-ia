@@ -12,11 +12,11 @@ tabela.
 
 | Documento | Itens rastreados | Fonte TRANSCRICAO | Fonte CODIGO |
 | --- | --- | --- | --- |
-| [`docs/PRD.md`](./PRD.md) | 89 | 84 | 5 |
+| [`docs/PRD.md`](./PRD.md) | 91 | 86 | 5 |
 | [`docs/RFC.md`](./RFC.md) | 22 | 21 | 1 |
 | [`docs/adrs/`](./adrs/) | 8 | 8 | 0 |
 | [`docs/FDD.md`](./FDD.md) | 126 | 89 | 37 |
-| **Total** | **245** | **202 (82,4%)** | **43 (17,6%)** |
+| **Total** | **247** | **204 (82,6%)** | **43 (17,4%)** |
 
 Os 43 itens com fonte `CODIGO` apontam para **21 arquivos distintos** do repositório, todos verificados.
 
@@ -128,6 +128,8 @@ Os 43 itens com fonte `CODIGO` apontam para **21 arquivos distintos** do reposit
 | PRD-TO-04 | docs/PRD.md | Trade-off | Secret por endpoint: contém dano, custa gestão de ciclo de vida | TRANSCRICAO | `[09:21] Sofia` |
 | PRD-TO-05 | docs/PRD.md | Trade-off | At-least-once: simples para nós, exige trabalho do cliente | TRANSCRICAO | `[09:25] Diego` |
 | PRD-TO-06 | docs/PRD.md | Trade-off | Reuso dos padrões: velocidade ao custo de herdar limitações | TRANSCRICAO | `[09:30] Larissa` |
+| PRD-TO-07 | docs/PRD.md | Trade-off | Snapshot: fidelidade ao momento vs. dado possivelmente antigo | TRANSCRICAO | `[09:52] Larissa` |
+| PRD-TO-08 | docs/PRD.md | Trade-off | Filtro na origem: economia vs. evento anterior nunca alcançável | TRANSCRICAO | `[09:34] Bruno` |
 
 ### Critérios de aceitação
 
