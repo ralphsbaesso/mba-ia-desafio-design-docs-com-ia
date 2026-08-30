@@ -37,11 +37,11 @@ estava errada (ver *Iterações*).
 
 ## Workflow adotado
 
-O trabalho foi organizado em **8 fases, cada uma terminando num gate de saída verificável**, descritas em
-`PLANO.md`. Nenhuma fase avança com gate aberto.
+O trabalho foi organizado em **8 fases, cada uma terminando num gate de saída verificável**. Nenhuma
+fase avança com gate aberto.
 
 ```
-Fase 0  Enquadramento        → CLAUDE.md + PLANO.md
+Fase 0  Enquadramento        → CLAUDE.md (restrições, gates, altura de cada documento)
 Fase 1  Insumos              → 6 artefatos de triagem em docs/notas/
 Fase 2  PRD                  → docs/PRD.md
 Fase 3  RFC                  → docs/RFC.md (+ nomes de ADR congelados)
@@ -192,8 +192,8 @@ reunião.
 
 Cortar para caber significaria remover itens que alimentam o tracker, cuja cobertura **é critério de
 aceite pontuado** — enquanto a contagem de páginas **não aparece na checklist de aceite**. A escolha foi
-manter a cobertura, registrar o desvio como decisão consciente em `PLANO.md` e deixar documentada a
-instrução exata de reversão, caso se prefira a faixa estrita.
+manter a cobertura e registrar o desvio como decisão consciente, com a instrução exata de reversão —
+reduzir §4 de 7 para 4 alternativas e §6 de 5 para 3 riscos — caso se prefira a faixa estrita.
 
 ### O que a verificação mecânica cobre hoje
 
@@ -227,7 +227,6 @@ Ao fim de cada fase, e de novo na revisão final:
 ```
 .
 ├── README.md                    ← este documento (o processo)
-├── PLANO.md                     ← plano de execução: fases, gates, decisões pendentes
 ├── TRANSCRICAO.md               ← insumo, não alterado
 ├── docs/
 │   ├── PRD.md                   ← produto: por que e o quê
